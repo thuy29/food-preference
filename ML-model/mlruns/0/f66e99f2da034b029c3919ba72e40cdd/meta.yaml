@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/thoma/Downloads/reverse-todo-list/reverse-todo-list/dev-ops-final-project/ML-model/mlruns/0/f66e99f2da034b029c3919ba72e40cdd/artifacts
+end_time: 1735563054220
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f66e99f2da034b029c3919ba72e40cdd
+run_name: invincible-bat-553
+run_uuid: f66e99f2da034b029c3919ba72e40cdd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1735563045046
+status: 3
+tags: []
+user_id: thoma

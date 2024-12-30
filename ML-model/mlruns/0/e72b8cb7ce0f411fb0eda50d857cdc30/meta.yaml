@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/thoma/Downloads/reverse-todo-list/reverse-todo-list/dev-ops-final-project/ML-model/mlruns/0/e72b8cb7ce0f411fb0eda50d857cdc30/artifacts
+end_time: 1735563044914
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e72b8cb7ce0f411fb0eda50d857cdc30
+run_name: youthful-shad-50
+run_uuid: e72b8cb7ce0f411fb0eda50d857cdc30
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1735563035765
+status: 3
+tags: []
+user_id: thoma

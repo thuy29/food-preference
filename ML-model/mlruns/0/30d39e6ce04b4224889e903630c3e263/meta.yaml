@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/thoma/Downloads/reverse-todo-list/reverse-todo-list/dev-ops-final-project/ML-model/mlruns/0/30d39e6ce04b4224889e903630c3e263/artifacts
+end_time: 1735561989238
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 30d39e6ce04b4224889e903630c3e263
+run_name: indecisive-fox-182
+run_uuid: 30d39e6ce04b4224889e903630c3e263
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1735561980075
+status: 3
+tags: []
+user_id: thoma

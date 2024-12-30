@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/thoma/Downloads/reverse-todo-list/reverse-todo-list/dev-ops-final-project/ML-model/mlruns/0/6e09ea62dea74375bc30d0aaa0f00f04/artifacts
+end_time: 1735561979939
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6e09ea62dea74375bc30d0aaa0f00f04
+run_name: bittersweet-ape-867
+run_uuid: 6e09ea62dea74375bc30d0aaa0f00f04
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1735561969294
+status: 3
+tags: []
+user_id: thoma

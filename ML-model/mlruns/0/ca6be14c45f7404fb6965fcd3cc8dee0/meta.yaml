@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/thoma/Downloads/reverse-todo-list/reverse-todo-list/dev-ops-final-project/ML-model/mlruns/0/ca6be14c45f7404fb6965fcd3cc8dee0/artifacts
+end_time: 1735563064082
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ca6be14c45f7404fb6965fcd3cc8dee0
+run_name: unequaled-seal-717
+run_uuid: ca6be14c45f7404fb6965fcd3cc8dee0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1735563054365
+status: 3
+tags: []
+user_id: thoma

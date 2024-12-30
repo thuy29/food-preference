@@ -1,0 +1,27 @@
+{
+  "Traditional food": {
+    "precision": 0.9074074074074074,
+    "recall": 0.98,
+    "f1-score": 0.9423076923076924,
+    "support": 50
+  },
+  "Western Food": {
+    "precision": 0.75,
+    "recall": 0.375,
+    "f1-score": 0.5,
+    "support": 8
+  },
+  "accuracy": 0.896551724137931,
+  "macro avg": {
+    "precision": 0.8287037037037037,
+    "recall": 0.6775,
+    "f1-score": 0.7211538461538463,
+    "support": 58
+  },
+  "weighted avg": {
+    "precision": 0.8856960408684548,
+    "recall": 0.896551724137931,
+    "f1-score": 0.8812997347480107,
+    "support": 58
+  }
+}
