@@ -62,7 +62,7 @@ jobs:
           target_branch: staging
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Trigger push to staging
+      - name: Trigger push to staging branch
         if: success()
         run: |
           git config user.name "github-actions[bot]"
