@@ -61,3 +61,14 @@ jobs:
           from_branch: dev
           target_branch: staging
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger push event on Staging
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin staging
+          git checkout staging
+          git commit --allow-empty -m "Trigger push event after merge from dev"
+          git push origin staging
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
