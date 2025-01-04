@@ -1,10 +1,10 @@
 name: CI CD on Staging
 
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ['CI CD on Dev']
-    types:
-      - completed
+    types: [completed]
 
   push:
     branches:
