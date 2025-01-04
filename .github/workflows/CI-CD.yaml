@@ -8,10 +8,7 @@ on:
     branches:
       - dev
       - main
-  workflow_run:
-    workflows: ["CI CD pipeline"]
-    types:
-      - completed
+      - staging
 
 jobs:
   build-and-test-on-pr:
