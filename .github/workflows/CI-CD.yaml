@@ -1,4 +1,4 @@
-name: CI/CD pipeline
+name: CI CD pipeline
 
 on:
   pull_request:
@@ -45,9 +45,6 @@ jobs:
           from_branch: dev
           target_branch: staging
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-
-
 
   build-and-test-on-staging:
     if: github.ref == 'refs/heads/staging'
