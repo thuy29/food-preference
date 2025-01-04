@@ -59,16 +59,24 @@ jobs:
         run: pytest tests/E2E/
 
 
+
   push-to-staging:
-    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
-      - name: Push to staging branch
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure Git user
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git checkout -b staging
+
+      - name: Push to staging branch
+        run: |
+          git checkout staging
+          git merge --no-ff feature/test-workflow
           git push origin staging
+
 
   build-and-test-on-staging:
     if: github.ref == 'refs/heads/staging'
