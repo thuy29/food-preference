@@ -28,8 +28,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run unit tests
+        run: pytest tests/unit\ tests/
+
       - name: Run integration tests
-        run: pytest tests/test_api_integration.py
+        run: pytest tests/integration/
+
+      - name: Run end-to-end tests
+        run: pytest tests/E2E/
+
 
   push-to-staging:
     if: github.ref == 'refs/heads/dev'
