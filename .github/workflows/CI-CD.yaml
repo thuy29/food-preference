@@ -40,6 +40,11 @@ jobs:
         with:
           fetch-depth: 0  # Permet de récupérer toutes les branches
 
+      - name: Configure Git user
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
       - name: Push to staging branch
         run: |
           git checkout staging
