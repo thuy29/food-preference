@@ -26,3 +26,4 @@ replay_pid*
 ".dvc/config" 
 ".dvc/config" 
 ".dvc/config" 
+/data-file.bin
