@@ -6,6 +6,10 @@ on:
     types:
       - completed
 
+  push:
+    branches:
+      - staging
+
 
 permissions:
   contents: write
