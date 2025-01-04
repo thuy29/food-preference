@@ -2,7 +2,7 @@ name: CI CD on Staging
 
 on:
   workflow_run:
-    workflows: ["CI CD on Dev"]
+    workflows: ['CI CD on Dev']
     types:
       - completed
 
@@ -77,4 +77,4 @@ jobs:
           git commit --allow-empty -m "Trigger push event after merge from staging"
           git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
