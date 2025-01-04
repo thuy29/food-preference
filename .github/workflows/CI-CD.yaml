@@ -7,8 +7,11 @@ on:
   push:
     branches:
       - dev
-      - staging
       - main
+  workflow_run:
+    workflows: ["CI CD pipeline"]
+    types:
+      - completed
 
 jobs:
   build-and-test-on-pr:
@@ -70,10 +73,11 @@ jobs:
           type: now
           from_branch: dev
           target_branch: staging
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-test-on-staging:
     runs-on: ubuntu-latest
-    needs: push-to-staging
+    if: github.ref == 'refs/heads/staging' || github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
