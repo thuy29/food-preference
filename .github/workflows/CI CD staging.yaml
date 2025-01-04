@@ -1,9 +1,11 @@
 name: CI CD on Staging
 
 on:
-  push:
-    branches:
-      - staging
+  workflow_run:
+    workflows: ["CI CD on Dev"]
+    types:
+      - completed
+
 
 permissions:
   contents: write
