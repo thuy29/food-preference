@@ -45,9 +45,8 @@ jobs:
           git checkout staging
           git add .
           git commit -m "Automated push to staging branch"
-          git push https://PAT_TOKEN@github.com/Tomasvae/dev-ops-final-project.git staging
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          git push origin staging
+
 
 
   build-and-test-on-staging:
