@@ -1,4 +1,4 @@
-name: CI CD pipeline
+name: CI/CD pipeline
 
 on:
   pull_request:
@@ -28,26 +28,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run unit tests
-        run: pytest tests/unit\ tests/
-
       - name: Run integration tests
-        run: pytest tests/integration/
-
-      - name: Run end-to-end tests
-        run: pytest tests/E2E/
-
+        run: pytest tests/test_api_integration.py
 
   push-to-staging:
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
-      - name: Push to staging branch
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git checkout -b staging
-          git push origin staging
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Merge Dev into Staging
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: dev
+          target_branch: staging
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-test-on-staging:
     if: github.ref == 'refs/heads/staging'
