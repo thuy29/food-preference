@@ -54,7 +54,7 @@ jobs:
         run: pytest tests/E2E/
 
       - name: Merge dev into staging
-        if: ${{ github.event.pull_request.merged == true && success() }}
+        if: success()
         uses: devmasx/merge-branch@master
         with:
           type: now
