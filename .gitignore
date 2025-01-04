@@ -27,3 +27,33 @@ replay_pid*
 ".dvc/config" 
 ".dvc/config" 
 /data-file.bin
+
+# Node.js dependencies
+node_modules/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Pytest cache
+.pytest_cache/
+
+# DVC cache
+.dvc/cache/
+.dvc/tmp/
+
+# Environnement virtuel Python (si applicable)
+.env
+.conda/
+*.env
+
+# Jupyter Notebook checkpoints (si applicable)
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
