@@ -6,9 +6,6 @@ on:
     workflows: ['CI CD on Dev']
     types: [completed]
 
-  push:
-    branches:
-      - staging
 
 
 permissions:
