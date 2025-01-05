@@ -70,7 +70,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
 
-      - name: Trigger push event on Main
+      - name: Trigger push event on Main branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
