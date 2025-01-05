@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [gender, setGender] = useState('male');
+  const [gender, setGender] = useState('Male');
   const [nationality, setNationality] = useState('');
   const [age, setAge] = useState('');
   const [result, setResult] = useState(null);
