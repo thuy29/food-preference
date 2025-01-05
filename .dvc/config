@@ -2,5 +2,5 @@
     remote = storage
 ['remote "storage"']
     url = s3://mlprodprojectbucket
-    access_key_id = AKIA54WIF6PTF3LN6COK
-    secret_access_key = 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
+    access_key_id = ${AWS_ACCESS_KEY_ID}
+    secret_access_key = ${AWS_SECRET_ACCESS_KEY}
