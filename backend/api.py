@@ -7,10 +7,9 @@ from dotenv import load_dotenv
 import os
 from fastapi.middleware.cors import CORSMiddleware
 
-# Charger les variables d'environnement
+
 load_dotenv()
 
-# Récupérer les variables d'environnement
 dagshub_token = os.getenv("DAGSHUB_TOKEN")
 aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
 aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
@@ -30,19 +29,19 @@ food_model = mlflow.sklearn.load_model(f"models:/Food_model/{food_version}")
 juice_model = mlflow.sklearn.load_model(f"models:/Juice_model/{juice_version}")
 dessert_model = mlflow.sklearn.load_model(f"models:/Dessert_model/{dessert_version}")
 
-# Initialiser l'application FastAPI
+
 app = FastAPI(title="Food Preference Prediction API")
 
-# Configurer CORS pour autoriser les requêtes provenant de ton frontend
+# Authorize request from frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Autorise cette origine spécifique
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
-    allow_methods=["*"],  # Autorise toutes les méthodes (GET, POST, etc.)
-    allow_headers=["*"],  # Autorise tous les headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Définir un schéma de requête avec validation
+
 class UserInput(BaseModel):
     Gender: str = Field(..., description="Gender must be 'Male' or 'Female'")
     Nationality: str
@@ -51,7 +50,7 @@ class UserInput(BaseModel):
     @validator("Gender")
     def validate_gender(cls, value):
         """
-        Valide que le genre est soit 'Male', soit 'Female'.
+        Gender must be 'Male' or 'Female
         """
         valid_genders = ["Male", "Female"]
         if value not in valid_genders:
@@ -61,14 +60,14 @@ class UserInput(BaseModel):
 @app.post("/predict")
 def predict_preferences(user_input: UserInput):
     try:
-        # Créer un DataFrame "brut" avec les mêmes colonnes que X
+        # Create a valid dataframe
         input_df = pd.DataFrame([{
             "Gender": user_input.Gender,
             "Nationality": user_input.Nationality,
             "Age": user_input.Age
         }])
 
-        # Appeler directement le modèle chargé via MLflow
+        # Calls MLflow registered models
         food_prediction = food_model.predict(input_df)[0]
         juice_prediction = juice_model.predict(input_df)[0]
         dessert_prediction = dessert_model.predict(input_df)[0]
@@ -82,7 +81,6 @@ def predict_preferences(user_input: UserInput):
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 
-# Endpoint pour récupérer les métriques des modèles
 @app.get("/metrics")
 def get_metrics():
     return {
