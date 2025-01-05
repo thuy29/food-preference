@@ -51,11 +51,18 @@ jobs:
         run: |
           python ML-model/fetch_latest_model.py
 
-      - name: Build Docker image
+      - name: Build Docker image for backend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/food-preference-api:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/backend-api:latest -f backend/Dockerfile backend
 
-      - name: Push Docker image to DockerHub
+      - name: Build Docker image for frontend
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/food-preference-api:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend-app:latest -f frontend/Dockerfile frontend
 
+      - name: Push backend Docker image to DockerHub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/backend-api:latest
+
+      - name: Push frontend Docker image to DockerHub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/frontend-app:latest
