@@ -60,13 +60,14 @@ jobs:
       - name: Run end-to-end tests
         run: pytest tests/E2E/
 
-
-      - name: Merge Dev into main branch
+      - name: Merge dev into main
+        if: success()
         uses: devmasx/merge-branch@master
         with:
           type: now
           from_branch: staging
           target_branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
 
       - name: Trigger push event on Main
