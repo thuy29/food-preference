@@ -1,22 +1,19 @@
-name: CI CD on Staging
+name: CI CD on Dev
 
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows: ['CI CD on Dev']
-    types: [completed]
-
+  pull_request:
+    branches:
+      - dev
   push:
     branches:
-      - staging
-
+      - dev
 
 permissions:
   contents: write
 
+
 jobs:
-  build-and-test-on-staging:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  build-and-test-on-pr:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -60,23 +57,11 @@ jobs:
       - name: Run end-to-end tests
         run: pytest tests/E2E/
 
-      - name: Merge dev into main
+      - name: Merge dev into staging
         if: success()
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: staging
-          target_branch: main
+          from_branch: dev
+          target_branch: staging
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-
-      - name: Trigger push event on Main branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git checkout main
-          git commit --allow-empty -m "Trigger push event after merge from staging"
-          git push origin main
-        env:
-          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
