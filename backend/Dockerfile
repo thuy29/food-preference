@@ -4,6 +4,8 @@ FROM python:3.9-slim
 # Définir le répertoire de travail
 WORKDIR /app
 
+COPY requirements.txt /app/
+
 # Copier les fichiers de l'application dans le conteneur
 COPY backend/ /app
 
