@@ -6,9 +6,6 @@ on:
     workflows: ['CI CD on Staging']
     types: [completed]
 
-  push:
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -53,11 +50,11 @@ jobs:
 
       - name: Build Docker image for backend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/backend-api:latest -f backend/Dockerfile backend
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/backend-api:latest -f backend/Dockerfile .
 
       - name: Build Docker image for frontend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend-app:latest -f frontend/Dockerfile frontend
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend-app:latest -f frontend/Dockerfile .
 
       - name: Push backend Docker image to DockerHub
         run: |
