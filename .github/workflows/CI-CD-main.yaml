@@ -21,6 +21,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -33,7 +45,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image for backend
+      - name: Fetch latest model from MLFlow
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        run: |
+          python ML-model/fetch_latest_model.py
+
+     - name: Build Docker image for backend
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/backend-api:latest -f backend/Dockerfile backend
 
@@ -48,3 +66,4 @@ jobs:
       - name: Push frontend Docker image to DockerHub
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend-app:latest
+
