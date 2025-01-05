@@ -4,6 +4,7 @@ FROM node:16 AS build
 # Définir le répertoire de travail
 WORKDIR /app
 
+COPY requirements.txt /app/
 # Copier les fichiers package.json et package-lock.json
 COPY frontend/package*.json /app/
 
