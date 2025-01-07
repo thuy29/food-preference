@@ -2,19 +2,17 @@ FROM node:16 AS build
 
 WORKDIR /app
 
-COPY requirements.txt /app/
-COPY frontend/package*.json /app/
-
+COPY package*.json /app/
 RUN npm install
 
-COPY frontend/ /app
-
+COPY . /app
 RUN npm run build
 
-FROM nginx:latest
+# Étape finale pour servir l'application
+FROM node:16
+WORKDIR /app
+COPY --from=build /app/build /app
+RUN npm install -g serve
 
-COPY --from=build /app/build /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["sh", "-c", "nginx -g 'daemon off;' -c /etc/nginx/nginx.conf -p ${PORT}"]
+EXPOSE 3000
+CMD ["serve", "-s", ".", "-l", "3000"]
