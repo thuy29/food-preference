@@ -2,19 +2,11 @@ FROM node:16 AS build
 
 WORKDIR /app
 
-# Copier les fichiers package.json et package-lock.json depuis le dossier frontend
-COPY frontend/package*.json /app/
+COPY package*.json /app/
 RUN npm install
 
-# Copier le reste des fichiers du frontend
-COPY frontend/ /app
+COPY . /app
 RUN npm run build
 
-# Étape finale pour servir l'application
-FROM node:16
-WORKDIR /app
-COPY --from=build /app/build /app
-RUN npm install -g serve
-
 EXPOSE 3000
-CMD ["serve", "-s", ".", "-l", "3000"]
+CMD ["npx", "serve", "-s", "build", "-l", "3000"]
