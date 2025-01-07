@@ -1,13 +1,17 @@
 FROM node:16 AS build
 
 WORKDIR /app
-COPY frontend/package*.json /app/
+
+# Copier les fichiers package.json et package-lock.json
+COPY frontend/package*.json ./
 RUN npm install
-COPY . /app
+
+# Copier le reste des fichiers et construire le frontend
+COPY . .
 RUN npm run build
 
-FROM node:16-alpine
-
+# Étape finale pour servir l'application avec http-server
+FROM node:16
 WORKDIR /app
 COPY --from=build /app/build /app
 RUN npm install -g http-server
