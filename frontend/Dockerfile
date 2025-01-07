@@ -11,10 +11,10 @@ COPY frontend/ /app
 
 RUN npm run build
 
-FROM nginx:latest
+FROM nginx:alpine
 
 COPY --from=build /app/build /usr/share/nginx/html
 
 EXPOSE 80
 
-CMD ["sh", "-c", "nginx -g 'daemon off;' -c /etc/nginx/nginx.conf -p ${PORT}"]
+CMD ["nginx", "-g", "daemon off;"]
