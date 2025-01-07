@@ -63,11 +63,23 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend-app:latest
 
+      - name: Install Elastic Beanstalk CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          curl -LO https://github.com/aws/aws-elastic-beanstalk-cli-setup/archive/refs/tags/v1.1.0.zip
+          unzip v1.1.0.zip
+          cd aws-elastic-beanstalk-cli-setup-1.1.0
+          ./scripts/bundled_installer
+          echo 'export PATH=$PATH:$HOME/.ebcli-virtual-env/executables' >> ~/.bashrc
+          source ~/.bashrc
+
+
       - name: Deploy backend to AWS Elastic Beanstalk
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: "us-east-1"  # Remplace par ta région AWS
+          AWS_REGION: "eu-west-3"
         run: |
           # Créer un fichier Dockerrun.aws.json pour Elastic Beanstalk
           echo '{
