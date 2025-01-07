@@ -1,21 +1,20 @@
-# Étape de build
 FROM node:16 AS build
 
 WORKDIR /app
 
-# Copier uniquement les fichiers nécessaires pour l'installation des dépendances
-COPY frontend/package*.json ./
+COPY requirements.txt /app/
+COPY frontend/package*.json /app/
+
 RUN npm install
 
-# Copier le reste des fichiers et construire le frontend
-COPY frontend/ ./
+COPY frontend/ /app
+
 RUN npm run build
 
-# Étape finale pour servir l'application avec http-server
-FROM node:16
-WORKDIR /app
-COPY --from=build /app/build /app
-RUN npm install -g http-server
+FROM nginx:alpine
 
-EXPOSE 3000
-CMD ["http-server", ".", "-p", "3000"]
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
