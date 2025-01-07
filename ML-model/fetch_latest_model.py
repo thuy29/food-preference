@@ -27,3 +27,4 @@ def fetch_latest_model(model_name):
 fetch_latest_model("Food_model")
 fetch_latest_model("Juice_model")
 fetch_latest_model("Dessert_model")
+
