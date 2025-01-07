@@ -2,13 +2,14 @@ FROM node:16 AS build
 
 WORKDIR /app
 
-# Copier les fichiers package.json et package-lock.json
-COPY frontend/package*.json ./
+COPY requirements.txt /app/
+COPY frontend/package*.json /app/
+
 RUN npm install
 
-# Copier tout le contenu de frontend
-COPY frontend/ ./
-RUN npm run build
+COPY frontend/ /app
+
+
 
 # Étape finale pour servir l'application
 FROM node:16
