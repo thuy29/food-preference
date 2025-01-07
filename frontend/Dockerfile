@@ -6,11 +6,11 @@ WORKDIR /app
 COPY frontend/package*.json ./
 RUN npm install
 
-# Copier le reste des fichiers et construire le frontend
-COPY . .
+# Copier tout le contenu de frontend
+COPY frontend/ ./
 RUN npm run build
 
-# Étape finale pour servir l'application avec http-server
+# Étape finale pour servir l'application
 FROM node:16
 WORKDIR /app
 COPY --from=build /app/build /app
