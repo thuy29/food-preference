@@ -6,7 +6,6 @@ on:
     workflows: ['CI CD on Staging']
     types: [completed]
 
-
 permissions:
   contents: write
 
@@ -64,7 +63,7 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend-app:latest
 
-            - name: Deploy backend to AWS Elastic Beanstalk
+      - name: Deploy backend to AWS Elastic Beanstalk
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -83,7 +82,6 @@ jobs:
               }
             ]
           }' > Dockerrun.aws.json
-
           # Déployer avec l'outil AWS Elastic Beanstalk CLI
           eb init -p docker backend-api --region $AWS_REGION
           eb deploy
@@ -92,7 +90,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: "us-east-1"  # Remplace par ta région AWS
+          AWS_REGION: "eu-west-3"
         run: |
           # Créer un fichier Dockerrun.aws.json pour Elastic Beanstalk
           echo '{
@@ -107,8 +105,6 @@ jobs:
               }
             ]
           }' > Dockerrun.aws.json
-
           # Déployer avec l'outil AWS Elastic Beanstalk CLI
           eb init -p docker frontend-app --region $AWS_REGION
           eb deploy
-
