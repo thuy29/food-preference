@@ -1,20 +1,18 @@
+# Étape 1 : Build
 FROM node:16 AS build
 
 WORKDIR /app
-
-# Copier les fichiers package.json et package-lock.json depuis le dossier frontend
 COPY frontend/package*.json /app/
 RUN npm install
-
-# Copier le reste des fichiers du frontend
-COPY frontend/ /app
+COPY . /app
 RUN npm run build
 
-# Étape finale pour servir l'application
-FROM node:16
+# Étape 2 : Servir l'application
+FROM node:16-alpine
+
 WORKDIR /app
 COPY --from=build /app/build /app
-RUN npm install -g serve
+RUN npm install -g http-server
 
 EXPOSE 3000
-CMD ["serve", "-s", ".", "-l", "3000"]
+CMD ["http-server", ".", "-p", "3000"]
