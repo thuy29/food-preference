@@ -2,7 +2,7 @@ FROM node:16 AS build
 
 WORKDIR /app
 
-COPY package*.json /app/
+COPY frontend/package*.json /app/
 RUN npm install
 
 COPY . /app
